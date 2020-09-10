@@ -7,7 +7,6 @@ This project builds an ETL pipeline that extracts data from S3 bucket, stages it
 
 Infrastructure as Code (IaC) is used for configuration of the hardware resources for the project using `boto3`. The hardware setup revolves around two main resources which include setting up an IAM Role and spinning a Redshift cluster. An IAM Role is required to delegate permission to an AWS resource which in this case is a Redshift cluster. An IAM Role requires a trust relationship policy(JSON object) that defines which entity can assume this role and a permission policy that defines what the entity is allowed to do. In our case, the service defined in the trust relationship policy is the redshift service (`redshift.amazonaws.com`) while the permission allowed in the permission policy is the read permission from S3 bucket(`arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess`). The following diagram makes the understanding a bit more clear.
 
-![image info](https://github.com/anhassan/Data-WareHouse-Design-using-ETL-pipeline-with-AWS-S3-Redshift/blob/master/Images/IAM.png)
 <p align="center">
   <img src="https://github.com/anhassan/Data-WareHouse-Design-using-ETL-pipeline-with-AWS-S3-Redshift/blob/master/Images/IAM.png">
 </p>
