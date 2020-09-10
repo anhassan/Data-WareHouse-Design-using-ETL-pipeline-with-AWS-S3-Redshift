@@ -55,7 +55,10 @@ SELECT <column_names> FROM <table_name_staging_table>;
 ```
 The diagram below gives a pictorial view of how this done.
 
-![image info](https://github.com/anhassan/Data-WareHouse-Design-using-ETL-pipeline-with-AWS-S3-Redshift/blob/master/Images/ETL_Staging_StarSchema_.png)
+<p align="center">
+  <img width="719" height="700" src="https://github.com/anhassan/Data-WareHouse-Design-using-ETL-pipeline-with-AWS-S3-Redshift/blob/master/Images/ETL_Staging_StarSchema_.png">
+</p>
+
 
 The star schema makes sure that the data is denormalized , easy to understand and no complex joins are required to find out insights using analytical queries.
 
