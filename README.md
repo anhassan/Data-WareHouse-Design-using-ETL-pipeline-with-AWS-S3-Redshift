@@ -13,7 +13,9 @@ Infrastructure as Code (IaC) is used for configuration of the hardware resources
 
 Following setting up the IAM Role, a Redshift cluster needs to get setup to a host a database which would hold both the staging tables and the data warehouse. The specifications of the database and configuration details are red from `dwh.cfg` and the cluster is created.  The configuration details contain information such as the `arn`(amazon role name) for the IAM role which connects to the instance. Once the cluster is active a TCP port is opened(through a EC2 security group) for connecting traffic to the end point of the cluster. Finally the cluster end point is saved in the `dwh.cfg` file in order to connect with the database. Again the pictorial representation below brings in more clarity.
 
-![image info](https://github.com/anhassan/Data-WareHouse-Design-using-ETL-pipeline-with-AWS-S3-Redshift/blob/master/Images/RedShift_Config.png)
+<p align="center">
+  <img src="https://github.com/anhassan/Data-WareHouse-Design-using-ETL-pipeline-with-AWS-S3-Redshift/blob/master/Images/RedShift_Config.png">
+</p>
 
 The infrastructure describe above is set up running the following command
 ```bash
