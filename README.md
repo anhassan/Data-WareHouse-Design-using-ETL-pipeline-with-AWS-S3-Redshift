@@ -41,7 +41,10 @@ There are two options while loading the JSON data into a Redshift table(`auto` o
 
 The diagram below brings in more clarity with regards to the architecture explained above.
 
-![image info](https://github.com/anhassan/Data-WareHouse-Design-using-ETL-pipeline-with-AWS-S3-Redshift/blob/master/Images/S3_Redshift_ETL.png)
+<p align="center">
+  <img src="https://github.com/anhassan/Data-WareHouse-Design-using-ETL-pipeline-with-AWS-S3-Redshift/blob/master/Images/S3_Redshift_ETL.png">
+</p>
+
 
 Once the data is loaded in the staging tables, the transform phase begins. The transformation of the data is done according to the Kimball's Bus Architecture. A star schema is used with one fact table(`songplays`) and 4 dimension tables(`users`,`artists`,`songs` & `time`) in order to make the shema is best suited for running Adhoc OLAP queries.
 
