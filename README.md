@@ -6,9 +6,12 @@ This project builds an ETL pipeline that extracts data from S3 bucket, stages it
 # Infrastructure Setup
 
 Infrastructure as Code (IaC) is used for configuration of the hardware resources for the project using `boto3`. The hardware setup revolves around two main resources which include setting up an IAM Role and spinning a Redshift cluster. An IAM Role is required to delegate permission to an AWS resource which in this case is a Redshift cluster. An IAM Role requires a trust relationship policy(JSON object) that defines which entity can assume this role and a permission policy that defines what the entity is allowed to do. In our case, the service defined in the trust relationship policy is the redshift service (`redshift.amazonaws.com`) while the permission allowed in the permission policy is the read permission from S3 bucket(`arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess`). The following diagram makes the understanding a bit more clear.
+
 ![image info](https://github.com/anhassan/Data-WareHouse-Design-using-ETL-pipeline-with-AWS-S3-Redshift/blob/master/Images/IAM.png)
 
 Following setting up the IAM Role, a Redshift cluster needs to get setup to a host a database which would hold both the staging tables and the data warehouse. The specifications of the database and configuration details are red from `dwh.cfg` and the cluster is created.  The configuration details contain information such as the `arn`(amazon role name) for the IAM role which connects to the instance. Once the cluster is active a TCP port is opened(through a EC2 security group) for connecting traffic to the end point of the cluster. Finally the cluster end point is saved in the `dwh.cfg` file in order to connect with the database. Again the pictorial representation below brings in more clarity.
+
+![image info](https://github.com/anhassan/Data-WareHouse-Design-using-ETL-pipeline-with-AWS-S3-Redshift/blob/master/Images/RedShift_Config.png)
 
 The infrastructure describe above is set up running the following command
 ```bash
@@ -34,6 +37,8 @@ There are two options while loading the JSON data into a Redshift table(`auto` o
 
 The diagram below brings in more clarity with regards to the architecture explained above.
 
+![image info](https://github.com/anhassan/Data-WareHouse-Design-using-ETL-pipeline-with-AWS-S3-Redshift/blob/master/Images/S3_Redshift_ETL.png)
+
 Once the data is loaded in the staging tables, the transform phase begins. The transformation of the data is done according to the Kimball's Bus Architecture. A star schema is used with one fact table(`songplays`) and 4 dimension tables(`users`,`artists`,`songs` & `time`) in order to make the shema is best suited for running Adhoc OLAP queries.
 
 Finally, the data from staging tables is loaded from the staging tables into the fact and dimension tables using the following pseudo-code.
@@ -42,6 +47,8 @@ INSERT INTO <table_name_star_schema>(<column_names>)
 SELECT <column_names> FROM <table_name_staging_table>;
 ```
 The diagram below gives a pictorial view of how this done.
+
+![image info](https://github.com/anhassan/Data-WareHouse-Design-using-ETL-pipeline-with-AWS-S3-Redshift/blob/master/Images/ETL_Staging_StarSchema_.png)
 
 The star schema makes sure that the data is denormalized , easy to understand and no complex joins are required to find out insights using analytical queries.
 
