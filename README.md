@@ -62,7 +62,7 @@ The diagram below gives a pictorial view of how this done.
 
 The star schema makes sure that the data is denormalized , easy to understand and no complex joins are required to find out insights using analytical queries.
 
-In order to extract, transform and load (ETL) the data the following command is used.
+In order to extract, transform and load (ETL) use the following command.
 ```bash
 python etl.py
 ```
